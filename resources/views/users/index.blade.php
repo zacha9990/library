@@ -27,7 +27,7 @@
       <!-- Default box -->
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Books List</h3>
+          <h3 class="card-title">Users List</h3>
 
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -38,19 +38,16 @@
         </div>
         <div class="card-body">
 
-          @if(Auth::guard('admin')->check())
-            <a href="{{ route('books.create') }}" class="btn btn-outline-dark mb-2"> <i class="mdi mdi-plus-box"></i> Add Book</a>
-          @endif
-          
-            <table class = "table table-bordered" id = "users-table">
-          
+        @if(Auth::guard('admin')->check())
+        <a href="{{ route('users.create') }}" class="btn btn-outline-dark mb-2"> <i class="mdi mdi-plus-box"></i> Add User</a>
+        @endif  
+        
+        <table class = "table table-bordered" id = "users-table">
             <thead>
                 <tr>
                     <th>Id</th>
-                    <th>KodeBuku</th>
-                    <th>Judul</th>
-                    <th>Tahun Terbit</th>
-                    <th>Penulis</th>
+                    <th>Name</th>
+                    <th>Email</th>                
                     <th>Action</th>
                 </tr>
             </thead>
@@ -79,13 +76,11 @@ $(function() {
     $('#users-table').DataTable({
         processing: true,
         serverSide: true,
-        ajax: '{!! route('datatables.data') !!}',
+        ajax: '{!! route('user.lists') !!}',
         columns: [
             { data: 'id', name: 'id' },
-            { data: 'kode_buku', name: 'kode_buku' },
-            { data: 'judul_buku', name: 'judul_buku' },
-            { data: 'tahun_terbit', name: 'tahun_terbit' },
-            { data: 'penulis', name: 'penulis' },
+            { data: 'name', name: 'name' },
+            { data: 'email', name: 'email' },
             {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });
@@ -97,13 +92,11 @@ $(function() {
     $('#users-table').DataTable({
         processing: true,
         serverSide: true,
-        ajax: '{!! route('datatables.data') !!}',
+        ajax: '{!! route('user.lists') !!}',
         columns: [
             { data: 'id', name: 'id' },
-            { data: 'kode_buku', name: 'kode_buku' },
-            { data: 'judul_buku', name: 'judul_buku' },
-            { data: 'tahun_terbit', name: 'tahun_terbit' },
-            { data: 'penulis', name: 'penulis' },
+            { data: 'name', name: 'name' },
+            { data: 'email', name: 'email' },
             {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });

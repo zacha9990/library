@@ -23,7 +23,7 @@ class AdminTableSeeder extends Seeder
         for($i = 0; $i < 20; $i++) {
             App\Book::create([
                 'kode_buku'    => $faker->randomNumber($nbDigits=9),
-                'judul_buku'   => $faker->name,
+                'judul_buku'   => $faker->sentence,
                 'tahun_terbit' => $faker->year($max='now'),
                 'penulis'      => $faker->name,
                 'stok'         => rand(0,10),

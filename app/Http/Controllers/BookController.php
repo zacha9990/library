@@ -132,18 +132,19 @@ class BookController extends Controller
 
     public function anyData()
     {
-        $books = Book::select(['id','kode_buku','judul_buku','tahun_terbit','penulis']);
+        $books = Book::select(['id','kode_buku','judul_buku','tahun_terbit','penulis'])
+                    ->where('stok', '>', '0');
 
         if (Auth::guard('admin')->check()):
-            return Datatables::of(Book::query())
+            return Datatables::of($books)
             ->addColumn('action', function ($user) {
                 return '<a href="books/'.$user->id.'/edit" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a> <a href="'.route('bookss.delete', $user->id).'" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
             })
             ->make(true);
         else:
-            return Datatables::of(Book::query())
+            return Datatables::of($books)
             ->addColumn('action', function ($user) {
-                return '<a href="#" class="btn btn-xs btn-default"><i class="glyphicon glyphicon-default"></i>Pinjam</a>';
+                return '<a href="addToCart/'.$user->id.'" class="btn btn-xs btn-default"><i class="glyphicon glyphicon-default"></i>Pinjam</a>';
             })
             ->make(true);
         endif;

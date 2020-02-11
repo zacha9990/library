@@ -40,13 +40,34 @@ Route::resource('/datatables', 'BookController', [
 ]);
 
 Route::resource('/books', 'BookController');
+Route::resource('/users', 'UserController');
+Route::resource('/borrows', 'BorrowController');
 
 
 Route::get('/bookview', 'BookController@anyData');
+Route::get('/userview', 'UserController@all_user_yajra')->name('user.lists');
 
 Route::get('/deleteBook/{book}', 'BookController@deleteBook')->name('bookss.delete');
+Route::get('/deleteUser/{user}', 'UserController@deleteUser')->name('userss.delete');
 
 Route::get('/anyData', 'BookController@anyData')->name('datatables.data');
 
 Route::get('/adminLogout', 'Auth\LoginController@AdminLogout')->name('admin.logout');
 Route::get('/memberLogout', 'Auth\LoginController@MemberLogout')->name('member.logout');
+
+Route:: get('addToCart/{book}', 'BorrowController@addToCart')->name('add.to.cart');
+Route:: get('clearCart/{segment}', 'BorrowController@clearCart')->name('clear.cart');
+Route:: get('checkout/', 'BorrowController@showCheckOut')->name('checkout.page');
+
+
+//UNTUK API
+
+Route::get('/api/books', 'ApiController@all')->name('api.all');
+
+Route::post('/api/books/', 'ApiController@store')->name('api.store');
+
+Route::get('/api/books/{code}', 'ApiController@show')->name('api.show');
+
+Route::put('/api/books/{code}', 'ApiController@update')->name('api.update');
+
+Route::delete('/api/books/{code}', 'ApiController@destroy')->name('api.destroy');

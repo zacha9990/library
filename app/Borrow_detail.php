@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Borrow_detail extends Model
 {
-    public function borrows(){
-        return $this->hasOne('App\Borrow');
+    public function borrow(){
+        return $this->belongsTo('App\Borrow');
     }
 
-    public function books(){
-        return $this->hasOne('App\Book');
+    public function book(){
+        return $this->belongsTo('App\Book');
     }
 }
