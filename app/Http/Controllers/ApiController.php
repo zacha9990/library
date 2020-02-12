@@ -31,9 +31,11 @@ class ApiController extends Controller
         ]);
     }
 
-    public function show(Book $book)
+    public function show($code)
     {
-        return $book;
+        $books = Book::whereKode_buku($code)->get();
+
+        return response()->json($books);
     }
 
     public function update(Request $request, $code)
